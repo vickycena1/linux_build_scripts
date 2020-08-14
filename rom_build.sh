@@ -11,7 +11,7 @@
 # ROM building script.
 
 #incremental updated
-cp out/target/product/mido/obj/PACKAGE/target_files_intermediates/*.zip /home/shashank/RR/rr_ota
+cp out/target/product/mido/obj/PACKAGE/target_files_intermediates/*.zip /home/shashank/ota
 
 # Colors makes things beautiful
 export TERM=xterm
