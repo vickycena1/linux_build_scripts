@@ -10,6 +10,9 @@
 #
 # ROM building script.
 
+#incremental updated
+cp out/target/product/mido/obj/PACKAGE/target_files_intermediates/*.zip /home/shashank/RR/rr_ota
+
 # Colors makes things beautiful
 export TERM=xterm
 
@@ -20,7 +23,6 @@ export TERM=xterm
     txtrst=$(tput sgr0)             #  Reset
 
 # CCACHE UMMM!!! Cooks my builds fast
-
 if [ "$use_ccache" = "yes" ];
 then
 echo -e ${blu}"CCACHE is enabled for this build"${txtrst}
