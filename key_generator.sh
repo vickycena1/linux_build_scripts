@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #
-# Copyright (C) 2019 PixysOS project.
 # Copyright (C) 2020 Shashank patil custom script.
 #
 # Licensed under the General Public License.
