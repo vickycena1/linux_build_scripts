@@ -70,6 +70,7 @@ make -j"$job" O=out \
           OBJDUMP=llvm-objdump \
 	  STRIP=llvm-strip \
           CC=clang \
+          HOSTCC=clang mrproper \       
           CLANG_TRIPLE=aarch64-linux-gnu- \
           CROSS_COMPILE=aarch64-linux-gnu- \
 	  CROSS_COMPILE_ARM32=arm-linux-gnueabi-
