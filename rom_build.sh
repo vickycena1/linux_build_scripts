@@ -60,7 +60,6 @@ fi
 source build/envsetup.sh
 export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
 export TARGET_USES_PREBUILT_CAMERA_SERVICE=false
-export SELINUX_IGNORE_NEVERALLOWS=true
 export KBUILD_BUILD_HOST="shashank'sBuildBot"
 export KBUILD_BUILD_USER="shashank"
 lunch "$lunch_command"_"$device_codename"-"$build_type"
