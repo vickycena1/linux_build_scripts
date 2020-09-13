@@ -27,7 +27,6 @@ cd zip && rm -rf *.zip && rm -rf zImage && cd ..
 # Export
 export KBUILD_BUILD_HOST="shashank's buildbot"
 export KBUILD_BUILD_USER="shashank"
-export LOCALVERSION=Darkphoenix
 export ARCH=arm64 
 export SUBARCH=arm64
 PATH="/home/shashank/toolchain/clang/bin:$PATH"
