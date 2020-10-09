@@ -58,6 +58,7 @@ fi
 
 # Build ROM
 source build/envsetup.sh
+export username=shashank
 export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
 export TARGET_USES_PREBUILT_CAMERA_SERVICE=false
 export KBUILD_BUILD_HOST="shashank'sBuildBot"
