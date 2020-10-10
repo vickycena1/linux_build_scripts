@@ -61,7 +61,7 @@ source build/envsetup.sh
 export username=shashank
 export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
 export TARGET_USES_PREBUILT_CAMERA_SERVICE=false
-BUILD_BROKEN_DUP_RULES=true
+export BUILD_BROKEN_DUP_RULES=true
 export KBUILD_BUILD_HOST="shashank'sBuildBot"
 export KBUILD_BUILD_USER="shashank"
 lunch "$lunch_command"_"$device_codename"-"$build_type"
