@@ -62,6 +62,8 @@ echo -e ${cya}"Images deleted from OUT dir"${txtrst};
 fi
 
 # TWRP ROM
+virtualenv --python=python2 env
+source env/bin/activate
 source build/envsetup.sh
 export ALLOW_MISSING_DEPENDENCIES=true
 lunch "$lunch_command"_"$device_codename"-"$build_type"
