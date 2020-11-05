@@ -20,42 +20,23 @@ export TERM=xterm
     cya=$(tput setaf 6)             #  cyan
     txtrst=$(tput sgr0)             #  Reset
 
-# clean up zip
-echo -e ${blu}"removing privies kernel zip"${txtrst}
-cd zip && rm -rf *.zip && rm -rf zImage && cd ..
+# Expect
+export CHANNEL_ID="$ID" # Telegram Channel ID
+export TELEGRAM_TOKEN="$BOT_API_KEY" # Bot ( admin ) on telegram channel
+export TC_PATH="$HOME/toolchains" # Toolchain Directory
+export ZIP_DIR="$HOME/zip" # AnyKernel3 ( by osm0sis ) Directory
+
+# clone
+git clone --depth=1 https://github.com/kdrag0n/proton-clang.git ${TC_PATH}/clang
+rm -rf $ZIP_DIR && git clone https://github.com/shashank1436/AnyKernel3 -b mido-ten $ZIP_DIR
 
 # Export
 export KBUILD_BUILD_HOST="shashank's buildbot"
 export KBUILD_BUILD_USER="shashank"
 export ARCH=arm64 
 export SUBARCH=arm64
-PATH="/home/shashank/toolchain/clang/bin:$PATH"
-export STRIP=/home/shashank/toolchain/clang/aarch64-linux-gnu/bin/strip
-
-# Clean out folder
-if [ "$CLEAN" = "yes" ]
-then echo -e ${blu}"Removing existing images"${txtrst}
-make clean O=out
-fi
-
-# cache
-if [ "$use_ccache" = "yes" ]; 
-then echo -e ${blu}"CCACHE is enabled for this build"${txtrst} 
-export CCACHE_EXEC=$(which ccache) 
-export USE_CCACHE=1 
-export CCACHE_DIR=/home/shashank/ccache/
-ccache -M 75G
-fi
-
-if [ "$use_ccache" = "clean" ]; 
-then export CCACHE_EXEC=$(which ccache) 
-export CCACHE_DIR=/home/shashank/ccache
-ccache -C
-export USE_CCACHE=1 
-ccache -M 75
-wait 
-echo -e ${grn}"CCACHE Cleared"${txtrst};
-fi
+PATH="${TC_PATH}"clang/bin:$PATH"
+export STRIP="${TC_PATH}/clang/aarch64-linux-gnu/bin/strip"
 
 # Start compilation
 make mido_defconfig O=out/
@@ -75,7 +56,7 @@ make -j"$job" O=out \
 wait 
 wait
 echo -e ${blu}"ziping kernel img to flasher"${txtrst};
-cp out/arch/arm64/boot/Image.gz-dtb zip
-cd zip
+cp out/arch/arm64/boot/Image.gz-dtb "$ZIP_DIR"
+cd "$ZIP_DIR"
 mv Image.gz-dtb zImage 
 zip -r FoxKernel_4.9_"$DATE".zip *
