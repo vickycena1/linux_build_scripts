@@ -35,7 +35,7 @@ export STRIP=/home/shashank/toolchain/clang/aarch64-linux-gnu/bin/strip
 # Clean out folder
 if [ "$CLEAN" = "yes" ]
 then echo -e ${blu}"Removing existing images"${txtrst}
-make clean O=out
+make clean O=out && rm -rf out
 fi
 
 # cache
