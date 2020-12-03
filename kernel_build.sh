@@ -62,15 +62,24 @@ make mido_defconfig O=out/
 echo -e ${grn}"compilation started"${txtrst};
 wait
 make -j"$job" O=out \
-          ARCH=arm64 \
-          NM=llvm-nm \
-          OBJCOPY=llvm-objcopy \
-          OBJDUMP=llvm-objdump \
-	  STRIP=llvm-strip \
-          CC=clang \
-          CLANG_TRIPLE=aarch64-linux-gnu- \
-          CROSS_COMPILE=aarch64-linux-gnu- \
-	  CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+	ARCH=arm64 \
+	CC="ccache clang" \
+	AR=llvm-ar \
+	NM=llvm-nm \
+	LD=ld.lld \
+	STRIP=llvm-strip \
+	OBJCOPY=llvm-objcopy \
+	OBJDUMP=llvm-objdump \
+	OBJSIZE=llvm-size \
+	READELF=llvm-readelf \
+	HOSTCC=clang \
+	HOSTCXX=clang++ \
+	HOSTAR=llvm-ar \
+	HOSTLD=ld.lld \
+	CROSS_COMPILE=aarch64-linux-gnu- \
+	CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+	CONFIG_DEBUG_SECTION_MISMATCH=y \
+	CONFIG_NO_ERROR_ON_MISMATCH=y 
 
 wait 
 wait
