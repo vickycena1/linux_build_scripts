@@ -23,17 +23,18 @@ export TERM=xterm
 # Expect
 export CHANNEL_ID="$ID" # Telegram Channel ID
 export TELEGRAM_TOKEN="$BOT_API_KEY" # Bot ( admin ) on telegram channel
-export TC_PATH="$HOME/toolchains" # Toolchain Directory
-export ZIP_DIR="$HOME/zip" # AnyKernel3 ( by osm0sis ) Directory
+export TC_PATH="$HOME/mido/toolchains" # Toolchain Directory
+export ZIP_DIR="$HOME/mido/zip" # AnyKernel3 ( by osm0sis ) Directory
 
 # clone
+git clone --depth=1 https://github.com/shashank1436/kernel_xiaomi_mido mido && cd mido
 git clone --depth=1 https://github.com/kdrag0n/proton-clang.git ${TC_PATH}/clang
 rm -rf $ZIP_DIR && git clone https://github.com/shashank1436/anykernel $ZIP_DIR
 
 # Export
 export KBUILD_BUILD_HOST="shashank's buildbot"
 export KBUILD_BUILD_USER="shashank"
-export ARCH=arm64 
+export ARCH=arm64
 export SUBARCH=arm64
 PATH="${TC_PATH}"clang/bin:$PATH"
 export STRIP="${TC_PATH}/clang/aarch64-linux-gnu/bin/strip"
