@@ -29,7 +29,7 @@ export ZIP_DIR="$HOME/mido/zip" # AnyKernel3 ( by osm0sis ) Directory
 # clone
 git clone --depth=1 https://github.com/shashank1436/kernel_xiaomi_mido mido && cd mido
 git clone --depth=1 https://github.com/kdrag0n/proton-clang.git ${TC_PATH}/clang
-rm -rf $ZIP_DIR && git clone https://github.com/shashank1436/anykernel $ZIP_DIR
+git clone https://github.com/shashank1436/anykernel $ZIP_DIR
 
 # Export
 export KBUILD_BUILD_HOST="shashank's buildbot"
