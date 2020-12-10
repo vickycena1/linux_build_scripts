@@ -20,6 +20,18 @@ export TERM=xterm
     cya=$(tput setaf 6)             #  cyan
     txtrst=$(tput sgr0)             #  Reset
 
+# bot stuff
+export CHANNEL_ID="$ID" # Telegram Channel ID
+export TELEGRAM_TOKEN="$BOT_API_KEY" # Bot ( admin ) on telegram channel
+
+# zip pusher
+tg_pushzip() 
+{
+	curl -F document=@"$ZIP"  "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendDocument" \
+			-F chat_id=$CHANNEL_ID \
+			-F caption="Build Finished after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds"
+}
+
 # Expect
 export CHANNEL_ID="$ID" # Telegram Channel ID
 export TELEGRAM_TOKEN="$BOT_API_KEY" # Bot ( admin ) on telegram channel
