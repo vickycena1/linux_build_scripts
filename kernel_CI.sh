@@ -90,5 +90,6 @@ cp out/arch/arm64/boot/Image.gz-dtb "$ZIP_DIR"
 cd "$ZIP_DIR"
 mv Image.gz-dtb zImage 
 zip -r FoxKernel_4.9_"$DATE".zip *
-tg_post_build "$ZIP" "$CHATID"
+ZIP=$(echo *.zip)
+tg_pushzip
 fi
