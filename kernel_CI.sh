@@ -32,12 +32,15 @@ git clone --depth=1 https://github.com/kdrag0n/proton-clang.git ${TC_PATH}/clang
 git clone https://github.com/shashank1436/anykernel $ZIP_DIR
 
 # Export
+MY_DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 export KBUILD_BUILD_HOST="shashank's buildbot"
-export KBUILD_BUILD_USER="shashank"
+export KBUILD_BUILD_USER="CI"
 export ARCH=arm64
 export SUBARCH=arm64
 PATH="${TC_PATH}"clang/bin:$PATH"
 export STRIP="${TC_PATH}/clang/aarch64-linux-gnu/bin/strip"
+export IMG="$MY_DIR"/out/arch/arm64/boot/Image.gz-dtb
 
 # Start compilation
 make mido_defconfig O=out/
@@ -61,10 +64,19 @@ make -j"$job" O=out \
 	CROSS_COMPILE=aarch64-linux-gnu- \
 	CROSS_COMPILE_ARM32=arm-linux-gnueabi- 
 
-wait 
-wait
+if [ -f "$IMG" ]; then
+echo -e "$green << Build completed in $(($Diff / 60)) minutes and $(($Diff % 60)) seconds >> \n $white"
+        else
+                echo -e "$red << Failed to compile the kernel , Check up to find the error >>$white"
+                tg_error "error.log" "$CHATID"
+                exit 1
+        fi
+
+if [ -f "$IMG" ]; then
 echo -e ${blu}"ziping kernel img to flasher"${txtrst};
 cp out/arch/arm64/boot/Image.gz-dtb "$ZIP_DIR"
 cd "$ZIP_DIR"
 mv Image.gz-dtb zImage 
 zip -r FoxKernel_4.9_"$DATE".zip *
+tg_post_build "$ZIP" "$CHATID"
+fi
