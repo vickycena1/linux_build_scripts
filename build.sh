@@ -32,6 +32,7 @@ make clean && make clobber
 source build/envsetup.sh
 export username=shashank
 export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
+export ALLOW_MISSING_DEPENDENCIES=true
 export KBUILD_BUILD_HOST="shashank'sBuildBot"
 export KBUILD_BUILD_USER="shashank"
 lunch dot_mido-eng
